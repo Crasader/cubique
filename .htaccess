@@ -1,0 +1,12 @@
+Options -Indexes
+
+RewriteEngine On
+
+#RewriteRule ^.*assets\/(.+\..{2,5})$ - [E=!ROOT]
+RewriteRule ^.*assets\/(.+\..{2,5})$ web/assets/$1 [L]
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} !-d [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+#RewriteRule ^ - [E=ROOT:%{DOCUMENT_ROOT}]
+RewriteRule ^ app/core.php [QSA,L]
