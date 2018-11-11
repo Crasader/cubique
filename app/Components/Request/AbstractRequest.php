@@ -6,25 +6,18 @@ use Components\Common\GetterSetter;
 
 abstract class AbstractRequest implements RequestInterface
 {
+    const METHOD_GET = 'GET';
+    const METHOD_POST = 'POST';
+    const METHOD_PUT = 'PUT';
+    const METHOD_UPDATE = 'UPDATE';
+    const METHOD_DELETE = 'DELETE';
+    const METHOD_PATCH = 'PATCH';
+
     public $query;
-    public $routeParams;
-    private $method;
-    private $uri;
+    protected $method;
+    protected $uri;
     private $timestamp;
     private $valid = false;
-
-    public function __construct()
-    {
-        $this->query = new GetterSetter(array_merge(
-            $_REQUEST,
-            $_GET,
-            $_POST
-        ));
-
-        $this->uri = $_SERVER['REQUEST_URI'];
-        $this->method = $_SERVER['REQUEST_METHOD'];
-        $this->timestamp = $_SERVER['REQUEST_TIME'];
-    }
 
     public function getMethod()
     {
@@ -36,19 +29,24 @@ abstract class AbstractRequest implements RequestInterface
         return $this->uri;
     }
 
-    public function setRouteParams(array $routeParams) {
-        $this->routeParams = new GetterSetter($routeParams);
-        return $this;
-    }
-
     public function setValid($flag)
     {
         $this->valid = $flag;
         return $this;
     }
 
+    public function isAjaxRequest()
+    {
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+    }
+
     public function isValid()
     {
         return $this->valid;
+    }
+
+    protected function setTimestamp($timestamp)
+    {
+        $this->timestamp = $timestamp;
     }
 }

@@ -2,10 +2,11 @@
 namespace Base;
 
 use Components\Controller\Controller;
+use Components\Request\Request;
 
 class BaseController extends Controller
 {
-    public function GetIndex()
+    public function index(array $test)
     {
         
     }

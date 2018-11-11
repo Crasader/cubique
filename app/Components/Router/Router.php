@@ -57,8 +57,8 @@ abstract class Router implements RouterInterface
         }
 
         self::$request
-            ->setRouteParams($routeParams)
-            ->setValid(true);
+            ->setValid(true)
+            ->query->set('RouteParams', $routeParams);
 
         return true;
     }

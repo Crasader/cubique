@@ -1,5 +1,5 @@
 <?php
-define('CONTROLLER', '../controller/');
+define('CONTROLLER', '../controllers/');
 define('APP', '../app/');
 
 spl_autoload_register(function ($namespace)

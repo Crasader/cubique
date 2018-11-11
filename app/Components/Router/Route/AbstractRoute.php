@@ -7,8 +7,12 @@ abstract class AbstractRoute implements RouteInterface
 {
     const METHOD_GET = 'GET';
     const METHOD_POST = 'POST';
+    const METHOD_PUT = 'PUT';
+    const METHOD_UPDATE = 'UPDATE';
+    const METHOD_DELETE = 'DELETE';
+    const METHOD_PATCH = 'PATCH';
     
-    private $method;
-    private $pattern;
-    private $action;
+    protected $method;
+    protected $pattern;
+    protected $action;
 }
